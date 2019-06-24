@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+IPL
+{% endblock %}
+
+{% block user %}
+{% if user%}
+<img src="{% static "user.png"%}" style="position:absolute;left:95%;top:9%;margin-left:-50px;margin-top:-50px" width="30" height="30">
+<h2  style="position:absolute;left:98%;top:10%;margin-left:-50px;margin-top:-50px"><strong>{{user}}</strong></h2>
+<span class="button is-hoverable is-primary is-medium " style="position:absolute;left:95%;top:15%;margin-left:-50px;margin-top:-50px" onclick="location.href='{% url 'logout' %}'">logout</span>
+{%else%}
+ <span class="button is-hoverable is-primary is-medium " style="position:absolute;left:96%;top:8%;margin-left:-50px;margin-top:-50px" onclick="location.href='{% url 'login' %}'">login</span>
+{%endif%}
+{% endblock %}
+
+
+{% block head %}
+<h1 class="title is-text-centered">Points Table</h1>
+{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<h1 class="hero is-primary has-text-centered" style="padding:5px"><strong>{{season}}</strong></h1>
+<h1 class="hero is-primary has-text-centered" style="padding:5px"><strong>Points Table</strong></h1>
+<table border="1px" class="table is-hoverable is-fullwidth">
+    <tr>
+        <th>Team</th>
+        <th>Matches</th>
+        <th>Won</th>
+        <th>Lost</th>
+        <th>No Result</th>
+        <th>Points</th>
+    </tr>
+    {% for team in points %}
+    <tr>
+        <td>{{team.0}}</td>
+        <td>{{team.1.4}}</td>
+        <td>{{team.1.1}}</td>
+        <td>{{team.1.3}}</td>
+        <td>{{team.1.2}}</td>
+        <td>{{team.1.0}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

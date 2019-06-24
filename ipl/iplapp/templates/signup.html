@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SignUp</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "bulma.css"%}">
+</head>
+<body>
+<form method="post">
+    {%csrf_token%}
+
+    <div class="box is-small" style="width:50%;position:absolute;left:28%;top:5%">
+    <h1 class="hero is-info has-text-centered" style="padding:5px"><strong>Sign Up</strong></h1>
+    <div class="field"><h1>First Name</h1>
+        <div class="control">
+            {{form.first_name}}
+        </div>
+    </div>
+    <div class="field"><h1>Last Name</h1>
+        <div class="control">
+            {{form.last_name}}
+        </div>
+    </div>
+    <div class="field"><h1>Email</h1>
+        <div class="control">
+            {{form.email}}
+        </div>
+    </div>
+    <div class="field"><h1>UserName</h1>
+        <div class="control">
+            {{form.username}}
+        </div>
+    </div>
+    <div class="field"><h1>Password</h1>
+        <div class="control">
+            {{form.password}}
+        </div>
+    </div>
+    <input class="button" type="submit" value="Submit">
+    </div>
+</form>
+
+</body>
+</html>

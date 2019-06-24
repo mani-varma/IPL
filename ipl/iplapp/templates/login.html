@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "bulma.css"%}">
+</head>
+<body>
+<div style="width:40%;position:absolute;left:30%;top:10%" class="box has-text-centered" >
+<form method="post">
+    {%csrf_token%}
+    <div class="field"><h1>UserName</h1>
+        <div class="control">
+            {{form.username}}
+        </div>
+    </div>
+    <div class="field"><h1>Password</h1>
+        <div class="control">
+            {{form.password}}
+        </div>
+    </div>
+    <input class="button is-link has-text-centered" style="text-align:center" type="submit" value="Login">
+    <br>
+    <br>
+    <br>
+</form>
+<span class="has-text-link has-text-centered" onclick="location.href='{%url 'signup'%}'">SIGN UP</span>
+{% if messages %}
+    <br>
+    <br>
+    <article class="message is-danger has-text-centered" style="width:40%;margin:auto">
+        <div class="message-header">
+            <p>Error</p>
+        </div>
+        <div class="message-body">
+            {% for msg in messages %}
+                {{msg}}
+            {% endfor %}
+        </div>
+    </article>
+{% endif %}
+</div>
+</body>
+</html>

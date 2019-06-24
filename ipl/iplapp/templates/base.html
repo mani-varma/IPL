@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{%block title%}{%endblock%}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "bulma.css"%}">
+    <script>
+       function goToSeason()
+        {
+            season=document.getElementById('season').value;
+            window.location="http://127.0.0.1:8000/season/"+season
+        }
+        function goToTable()
+        {
+            table=document.getElementById('table').value;
+            window.location="http://127.0.0.1:8000/table/"+table;
+        }
+        function goToTeam()
+        {
+            team=document.getElementById('team').value;
+            window.location="http://127.0.0.1:8000/team/"+team;
+        }
+    </script>
+
+</head>
+
+<body>
+
+<section class="hero is-primary is-bold" >
+  <div class="hero-body">
+      <div>
+          {%block user%}
+          {%endblock%}
+        {%block head%}
+        {%endblock%}
+        <select id="season" onchange="goToSeason()" style="position:absolute;left:10%;top:20%;width:1000">
+            <option>Seasons</option>
+            <option>2019</option>
+            <option>2018</option>
+            <option>2017</option>
+            <option>2016</option>
+            <option>2015</option>
+            <option>2014</option>
+            <option>2013</option>
+            <option>2012</option>
+            <option>2011</option>
+            <option>2010</option>
+            <option>2009</option>
+            <option>2008</option>
+        </select>
+          <select id="table" onchange="goToTable()" style="position:absolute;left:45%;top:20%">
+            <option>Points Tables</option>
+            <option>2019</option>
+            <option>2018</option>
+            <option>2017</option>
+            <option>2016</option>
+            <option>2015</option>
+            <option>2014</option>
+            <option>2013</option>
+            <option>2012</option>
+            <option>2011</option>
+            <option>2010</option>
+            <option>2009</option>
+            <option>2008</option>
+        </select>
+              <select id="team" onchange="goToTeam()" style="position:absolute;left:80%;top:20%">
+            <option>Teams</option>
+            <option>Sunrisers Hyderabad</option>
+            <option>Mumbai Indians</option>
+            <option>Gujarat Lions</option>
+            <option>Rising Pune Supergiants</option>
+            <option>Royal Challengers Bangalore</option>
+            <option>Kolkata Knight Riders</option>
+            <option>Delhi Daredevils</option>
+            <option>Kings XI Punjab</option>
+            <option>Chennai Super Kings</option>
+            <option>Rajasthan Royals</option>
+            <option>Deccan Chargers</option>
+            <option>Kochi Tuskers Kerala</option>
+            <option>Delhi Capitals</option>
+        </select>
+    </div>
+  </div>
+</section>
+
+<div style="width:80%;margin:auto">
+{%block body%}
+{%endblock%}
+</div>
+</body>
+</html>

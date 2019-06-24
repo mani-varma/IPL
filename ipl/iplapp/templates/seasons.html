@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+IPL
+{% endblock %}
+
+{% block user %}
+{% if user%}
+<img src="{% static "user.png"%}" style="position:absolute;left:95%;top:9%;margin-left:-50px;margin-top:-50px" width="30" height="30">
+<h2  style="position:absolute;left:98%;top:10%;margin-left:-50px;margin-top:-50px"><strong>{{user}}</strong></h2>
+<span class="button is-hoverable is-primary is-medium " style="position:absolute;left:95%;top:15%;margin-left:-50px;margin-top:-50px" onclick="location.href='{% url 'logout' %}'">logout</span>
+{%else%}
+ <span class="button is-hoverable is-primary is-medium " style="position:absolute;left:96%;top:8%;margin-left:-50px;margin-top:-50px" onclick="location.href='{% url 'login' %}'">login</span>
+{%endif%}
+
+{% endblock %}
+
+
+{% block head %}
+<h1 class="title has-text-centered"><strong>IPL</strong></h1>
+{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<h1 class="has-text-centered" style="padding:5px"><strong>{{season}}</strong></h1>
+<h1 class="hero is-primary has-text-centered" style="padding:5px"><strong>Matches</strong></h1>
+<table border="1px" class="table is-hoverable is-fullwidth">
+    <tr>
+        <th>Team1</th>
+        <th>Team2</th>
+        <th>Venue</th>
+        <th>Toss</th>
+        <th>Decision</th>
+        <th>Result</th>
+        <th>MoM</th>
+        <th>         </th>
+    </tr>
+    {% for match in matches %}
+        <tr>
+            <td>{{match.team1}}</td>
+            <td>{{match.team2}}</td>
+            <td>{{match.venue}}</td>
+            <td>{{match.toss_winner}}</td>
+            <td>{{match.toss_decision}}</td>
+            <td>{{match.result}}</td>
+            <td>{{match.player_of_match}}</td>
+            <td class="button is-primary" onclick="location.href='{% url 'match' season=match.season mid=match.mid %}'">Details</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

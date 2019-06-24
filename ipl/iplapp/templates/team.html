@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+IPL
+{% endblock %}
+
+{% block user %}
+{% if user%}
+<img src="{% static "user.png"%}" style="position:absolute;left:95%;top:9%;margin-left:-50px;margin-top:-50px" width="30" height="30">
+<h2  style="position:absolute;left:98%;top:10%;margin-left:-50px;margin-top:-50px"><strong>{{user}}</strong></h2>
+<span class="button is-hoverable is-primary is-medium " style="position:absolute;left:95%;top:15%;margin-left:-50px;margin-top:-50px" onclick="location.href='{% url 'logout' %}'">logout</span>
+{%else%}
+ <span class="button is-hoverable is-primary is-medium " style="position:absolute;left:96%;top:8%;margin-left:-50px;margin-top:-50px" onclick="location.href='{% url 'login' %}'">login</span>
+{%endif%}
+{% endblock %}
+
+
+{% block head %}
+<h1 class="title is-text-centered">{{Team}}</h1>
+{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<h1 class="hero is-primary has-text-centered" style="padding:5px">Stats</h1>
+<table border="1px" class="table is-hoverable is-fullwidth">
+    <tr>
+        <th>Matches</th>
+        <td>{{stats.0}}</td>
+    </tr>
+    <tr>
+        <th>Won</th>
+        <td>{{stats.1}}</td>
+    </tr>
+    <tr>
+        <th>Lost</th>
+        <td>{{stats.3}}</td>
+    </tr>
+    <tr>
+        <th>NR</th>
+        <td>{{stats.2}}</td>
+    </tr>
+</table>
+{% for season in details %}
+<br>
+<br>
+<h1 class="hero is-primary has-text-centered" style="padding:5px">{{season.0.season}}</h1>
+<table border="1px" class="table is-hoverable is-fullwidth">
+    <tr>
+        <th>Match</th>
+        <th>Teams</th>
+        <th>Toss</th>
+        <th>Decision</th>
+        <th>Result</th>
+        <th>Winner</th>
+        <th>MoM</th>
+    </tr>
+    {% for match in season %}
+        <tr>
+            <td>{{match.mid}}</td>
+            <td>{{match.team1}} vs {{match.team2}}</td>
+            <td>{{match.toss_winner}}</td>
+            <td>{{match.toss_decision}}</td>
+            <td>{{match.result}}</td>
+            <td>{{match.winner}}</td>
+            <td>{{match.player_of_match}}</td>
+        </tr>
+    {% endfor %}
+</table>
+ {% endfor %}
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+IPL
+{% endblock %}
+
+{% block user %}
+<img src="{% static "user.png"%}" style="position:absolute;left:95%;top:9%;margin-left:-50px;margin-top:-50px" width="30" height="30">
+<h2  style="position:absolute;left:98%;top:10%;margin-left:-50px;margin-top:-50px"><strong>{{user}}</strong></h2>
+<span class="button is-hoverable is-primary is-medium " style="position:absolute;left:95%;top:15%;margin-left:-50px;margin-top:-50px" onclick="location.href='{% url 'logout' %}'">logout</span>
+{% endblock %}
+
+{% block head %}
+<h1 class="title is-text-centered">Commentry</h1>
+{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<h1 class="hero is-primary has-text-centered" style="padding:5px"><strong>Scorecard</strong></h1>
+<table border="1px" class="table is-hoverable is-fullwidth" id="res">
+    <tr>
+        <th>Ball</th>
+        <th>Bowler</th>
+        <th>Batsman</th>
+        <th>Result</th>
+    </tr>
+    {% for delivery in deliveries %}
+    <tr>
+        <td>{{delivery.over}}.{{delivery.ball}}</td>
+        <td>{{delivery.bowler}}</td>
+        <td>{{delivery.batsman}}</td>
+        {% if delivery.player_dismissed is NULL%}
+            <td>{{delivery.total_runs}}</td>
+        {% else %}
+            <td>Wicket</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

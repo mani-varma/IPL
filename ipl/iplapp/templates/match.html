@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+IPL
+{% endblock %}
+
+{% block user %}
+<img src="{% static "user.png"%}" style="position:absolute;left:95%;top:9%;margin-left:-50px;margin-top:-50px" width="30" height="30">
+<h2  style="position:absolute;left:98%;top:10%;margin-left:-50px;margin-top:-50px"><strong>{{user}}</strong></h2>
+<span class="button is-hoverable is-primary is-medium " style="position:absolute;left:95%;top:15%;margin-left:-50px;margin-top:-50px" onclick="location.href='{% url 'logout' %}'">logout</span>
+{% endblock %}
+
+
+{% block head %}
+<h1 class="title has-text-centered">Match</h1>
+{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<h1 class="has-text-centered" style="padding:5px"><strong>{{match.team1}} vs {{match.team2}}</strong></h1>
+<table border="1px" class="table is-hoverable is-fullwidth">
+    <h1 class="hero is-primary has-text-centered" style="padding:5px"><strong>Match Details</strong></h1>
+    <tr>
+        <th>Match</th>
+        <td>{{match.team1}} vs {{match.team2}}</td>
+    </tr>
+    <tr>
+        <th>Toss</th>
+        <td>{{match.toss_winner}}</td>
+    </tr>
+    <tr>
+        <th>Decision</th>
+        <td>{{match.toss_decision}}</td>
+    </tr>
+    <tr>
+        <th>MoM</th>
+        <td>{{match.player_of_match}}</td>
+    </tr>
+</table>
+<br>
+<h1 class="hero is-primary has-text-centered" style="padding:5px"><strong>1<sup>st</sup> Innings</strong></h1>
+<h1 class="hero is-primary has-text-centered" style="padding:5px"><strong>Top Batting</strong></h1>
+<table border="1px" class="table is-hoverable is-fullwidth">
+    <tr>
+        <th>Batsman</th>
+        <th>Runs</th>
+    </tr>
+    {% for bat in bat1 %}
+    <tr>
+        <td>{{bat.batsman}}</td>
+        <td>{{bat.runs}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<h1 class="hero is-primary has-text-centered" style="padding:5px"><strong>Top Bowling</strong></h1>
+<table border="1px" class="table is-hoverable is-fullwidth">
+    <tr>
+        <th>Bowler</th>
+        <th>Figures</th>
+    </tr>
+    {% for ball in ball1 %}
+    <tr>
+        <td>{{ball.bowler}}</td>
+        <td>{{ball.wickets}}-{{ball.runs}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<h1 class="hero is-primary has-text-centered" style="padding:5px"><strong>2<sup>nd</sup> Innings</strong></h1>
+<h1 class="hero is-primary has-text-centered" style="padding:5px"><strong>Top Batting</strong></h1>
+
+<table border="1px" class="table is-hoverable is-fullwidth">
+    <tr>
+        <th>Batsman</th>
+        <th>Runs</th>
+    </tr>
+    {% for bat in bat2 %}
+    <tr>
+        <td>{{bat.batsman}}</td>
+        <td>{{bat.runs}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<h1 class="hero is-primary has-text-centered" style="padding:5px"><strong>Top Bowling</strong></h1>
+<table border="1px" class="table is-hoverable is-fullwidth">
+    <tr>
+        <th>Bowler</th>
+        <th>Figures</th>
+    </tr>
+    {% for ball in ball2 %}
+    <tr>
+        <td>{{ball.bowler}}</td>
+        <td>{{ball.wickets}}-{{ball.runs}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<span class="button is-primary" onclick="location.href='{% url 'inning' mid=match.mid innings=1%}'">1<sup>st</sup>  Innings</span>
+<span class="button is-primary" onclick="location.href='{% url 'inning' mid=match.mid innings=2%}'">2<sup>nd</sup>  Innings</span>
+{% endblock %}
